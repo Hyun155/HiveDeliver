@@ -16,7 +16,7 @@ import AnalyticsPage from "./pages/AnalyticsPage.jsx";
 import FleetPage from "./pages/FleetPage.jsx";
 
 /* NEW PAGE */
-import SwarmSimulationPage from "./pages/SwarmSimulationPage.jsx";
+import SwarmSimulation from "./pages/SwarmSimulation.jsx";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -56,7 +56,7 @@ function App() {
             <Route path="/fleet" element={<FleetPage />} />
 
             {/* NEW SWARM SIMULATION PAGE */}
-            <Route path="/swarm" element={<SwarmSimulationPage />} />
+            <Route path="/swarm" element={<SwarmSimulation />} />
 
             <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
