@@ -1,26 +1,30 @@
 import { useState } from "react";
+import { Box, Typography } from "@mui/material";
+
 import DroneSwarm from "../components/DroneSwarm";
 import ControlsPanel from "../components/ControlsPanel";
 import CoverageHeatmap from "../components/CoverageHeatmap";
 import RuralMap from "../components/RuralMap";
 
-export default function SwarmSimulation() {
+export default function SwarmSimulationPage() {
   const [running, setRunning] = useState(false);
   const [droneCount, setDroneCount] = useState(10);
   const [speed, setSpeed] = useState(1);
   const [heatmap, setHeatmap] = useState(false);
 
   return (
-    <div className="p-6 grid grid-cols-3 gap-6">
-      <div className="col-span-2">
-        {heatmap ? (
-          <CoverageHeatmap drones={droneCount} />
-        ) : (
-          <DroneSwarm drones={droneCount} speed={speed} running={running} />
-        )}
+    <Box p={3}>
+      <Typography variant="h4" mb={3}>
+        Drone Swarm Simulation
+      </Typography>
 
-        <RuralMap />
-      </div>
+      {heatmap ? (
+        <CoverageHeatmap />
+      ) : (
+        <DroneSwarm drones={droneCount} speed={speed} running={running} />
+      )}
+
+      <RuralMap />
 
       <ControlsPanel
         running={running}
@@ -32,6 +36,6 @@ export default function SwarmSimulation() {
         heatmap={heatmap}
         setHeatmap={setHeatmap}
       />
-    </div>
+    </Box>
   );
 }
