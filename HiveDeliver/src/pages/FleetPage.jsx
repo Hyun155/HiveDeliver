@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import {
   Box,
   LinearProgress,
@@ -22,12 +23,20 @@ const statusConfig = {
 }
 
 function FleetPage() {
+  const { t } = useTranslation()
+
+  const statusLabelMap = {
+    Idle: t('fleet.idle'),
+    Delivering: t('fleet.delivering'),
+    Charging: t('fleet.charging'),
+  }
+
   return (
     <Stack spacing={2.5}>
       <Box className="reveal-up">
         <PageHeader
-          title="Drone Fleet Management"
-          subtitle="Track battery levels, status, and location across all active drones."
+          title={t('fleet.title')}
+          subtitle={t('fleet.subtitle')}
         />
       </Box>
 
@@ -40,10 +49,10 @@ function FleetPage() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Drone ID</TableCell>
-                <TableCell>Battery Level</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Current Location</TableCell>
+                <TableCell>{t('fleet.droneId')}</TableCell>
+                <TableCell>{t('fleet.batteryLevel')}</TableCell>
+                <TableCell>{t('fleet.status')}</TableCell>
+                <TableCell>{t('fleet.currentLocation')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -93,7 +102,7 @@ function FleetPage() {
                               fontSize: '0.68rem',
                             }}
                           >
-                            {drone.batteryLevel > 70 ? 'Good' : drone.batteryLevel > 40 ? 'Medium' : 'Low'}
+                            {drone.batteryLevel > 70 ? t('fleet.good') : drone.batteryLevel > 40 ? t('fleet.medium') : t('fleet.low')}
                           </Typography>
                         </Stack>
                         <LinearProgress
@@ -114,7 +123,7 @@ function FleetPage() {
                     </TableCell>
                     <TableCell>
                       <Chip
-                        label={drone.status}
+                        label={statusLabelMap[drone.status] || drone.status}
                         size="small"
                         icon={
                           <Box

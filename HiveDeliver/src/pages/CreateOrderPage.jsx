@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Alert,
   Box,
@@ -25,6 +26,7 @@ const baseEtaByPriority = {
 }
 
 function CreateOrderPage() {
+  const { t } = useTranslation()
   const [form, setForm] = useState({
     customerName: '',
     deliveryAddress: '',
@@ -48,20 +50,20 @@ function CreateOrderPage() {
     event.preventDefault()
 
     if (!bestDrone) {
-      setResult('No idle drones are currently available. Please try again in a few minutes.')
+      setResult(t('order.noDronesAvailable'))
       return
     }
 
     const eta = baseEtaByPriority[form.priority] + Math.floor(Math.random() * 4)
-    setResult(`Drone ${bestDrone.droneId} assigned. Estimated delivery time: ${eta} minutes.`)
+    setResult(t('order.droneAssigned', { droneId: bestDrone.droneId, eta }))
   }
 
   return (
     <Stack spacing={2.5}>
       <Box className="reveal-up">
         <PageHeader
-          title="Create Delivery Order"
-          subtitle="Simulate AI-assisted order assignment based on priority and available drone capacity."
+          title={t('order.title')}
+          subtitle={t('order.subtitle')}
         />
       </Box>
 
@@ -71,7 +73,7 @@ function CreateOrderPage() {
             <Grid container spacing={2.5} component="form" onSubmit={handleAssign}>
               <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
-                  label="Customer Name"
+                  label={t('order.customerName')}
                   value={form.customerName}
                   onChange={handleChange('customerName')}
                   fullWidth
@@ -88,7 +90,7 @@ function CreateOrderPage() {
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
-                  label="Delivery Address"
+                  label={t('order.deliveryAddress')}
                   value={form.deliveryAddress}
                   onChange={handleChange('deliveryAddress')}
                   fullWidth
@@ -105,7 +107,7 @@ function CreateOrderPage() {
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
-                  label="Parcel Weight (kg)"
+                  label={t('order.parcelWeight')}
                   type="number"
                   value={form.parcelWeight}
                   onChange={handleChange('parcelWeight')}
@@ -124,17 +126,17 @@ function CreateOrderPage() {
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="priority-label">Delivery Priority</InputLabel>
+                  <InputLabel id="priority-label">{t('order.deliveryPriority')}</InputLabel>
                   <Select
                     labelId="priority-label"
-                    label="Delivery Priority"
+                    label={t('order.deliveryPriority')}
                     value={form.priority}
                     onChange={handleChange('priority')}
                     sx={{ borderRadius: 2.5 }}
                   >
-                    <MenuItem value="Low">Low</MenuItem>
-                    <MenuItem value="Medium">Medium</MenuItem>
-                    <MenuItem value="High">High</MenuItem>
+                    <MenuItem value="Low">{t('order.priorityLow')}</MenuItem>
+                    <MenuItem value="Medium">{t('order.priorityMedium')}</MenuItem>
+                    <MenuItem value="High">{t('order.priorityHigh')}</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -161,7 +163,7 @@ function CreateOrderPage() {
                     },
                   }}
                 >
-                  Assign Drone
+                  {t('order.assignDrone')}
                 </Button>
               </Grid>
             </Grid>

@@ -1,15 +1,18 @@
+import { useTranslation } from 'react-i18next'
 import { Card, CardContent, Typography, Stack, Box, Chip } from '@mui/material'
 
 function SwarmNetworkMini() {
+  const { t } = useTranslation()
+
   return (
     <Card className="hover-lift glow-card" sx={{ height: '100%', borderRadius: 3 }}>
       <CardContent sx={{ p: 2.5 }}>
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 1.5 }}>
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
-            Swarm Communication Mesh
+            {t('intelligence.swarmMesh')}
           </Typography>
           <Chip
-            label="Connected"
+            label={t('intelligence.connected')}
             size="small"
             sx={{
               bgcolor: 'rgba(34,197,94,0.08)',

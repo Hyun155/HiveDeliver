@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Box, Card, CardContent, Chip, Grid, Stack, Typography } from '@mui/material'
 import { FaLocationDot, FaMountainSun, FaWarehouse } from 'react-icons/fa6'
 import { GiDeliveryDrone } from 'react-icons/gi'
@@ -8,6 +9,7 @@ import EnhancedDroneMap from '../components/EnhancedDroneMap.jsx'
 import SimulationControls from '../components/SimulationControls.jsx'
 
 function LiveMapPage() {
+  const { t } = useTranslation()
   const [isRunning, setIsRunning] = useState(true)
   const [droneCount, setDroneCount] = useState(8)
   const [speed, setSpeed] = useState(1)
@@ -27,8 +29,8 @@ function LiveMapPage() {
     <Stack spacing={2.5}>
       <Box className="reveal-up">
         <PageHeader
-          title="Live Drone Map"
-          subtitle="Visualize warehouse dispatch, active drones, delivery routes, rural coverage, and no-fly zones in real time."
+          title={t('map.title')}
+          subtitle={t('map.subtitle')}
         />
       </Box>
 
@@ -74,44 +76,44 @@ function LiveMapPage() {
               <Card className="hover-lift glow-card" sx={{ borderRadius: 3 }}>
                 <CardContent sx={{ p: 2.5 }}>
                   <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1.5 }}>
-                    Map Legend
+                    {t('map.mapLegend')}
                   </Typography>
                   <Stack spacing={1}>
                     <div className="legend-row">
                       <span className="legend-icon legend-warehouse"><FaWarehouse /></span>
-                      <Typography variant="body2" color="text.primary">Warehouse (dispatch hub)</Typography>
+                      <Typography variant="body2" color="text.primary">{t('map.warehouseHub')}</Typography>
                     </div>
                     <div className="legend-row">
                       <span className="legend-icon legend-drone"><GiDeliveryDrone /></span>
-                      <Typography variant="body2" color="text.primary">Active drone</Typography>
+                      <Typography variant="body2" color="text.primary">{t('map.activeDrone')}</Typography>
                     </div>
                     <div className="legend-row">
                       <span className="legend-icon legend-point"><FaLocationDot /></span>
-                      <Typography variant="body2" color="text.primary">Urban destination</Typography>
+                      <Typography variant="body2" color="text.primary">{t('map.urbanDest')}</Typography>
                     </div>
                     <div className="legend-row">
                       <span className="legend-icon legend-rural"><FaMountainSun /></span>
-                      <Typography variant="body2" color="text.primary">Rural / remote destination</Typography>
+                      <Typography variant="body2" color="text.primary">{t('map.ruralDest')}</Typography>
                     </div>
                     <div className="legend-row">
                       <span className="legend-icon legend-critical"><MdPriorityHigh /></span>
-                      <Typography variant="body2" color="text.primary">Critical priority delivery</Typography>
+                      <Typography variant="body2" color="text.primary">{t('map.criticalDel')}</Typography>
                     </div>
                     <div className="legend-row">
                       <span className="legend-icon legend-nofly"><MdBlock /></span>
-                      <Typography variant="body2" color="text.primary">No-fly zone</Typography>
+                      <Typography variant="body2" color="text.primary">{t('map.noFlyZone')}</Typography>
                     </div>
                   </Stack>
 
                   {showHeatmap && (
                     <Stack sx={{ mt: 2 }}>
                       <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 0.5 }}>
-                        Heatmap Legend
+                        {t('map.heatmapLegend')}
                       </Typography>
                       <div className="heatmap-gradient-bar" />
                       <Stack direction="row" justifyContent="space-between">
-                        <Typography variant="caption" color="text.secondary">Low coverage</Typography>
-                        <Typography variant="caption" color="text.secondary">High coverage</Typography>
+                        <Typography variant="caption" color="text.secondary">{t('map.lowCoverage')}</Typography>
+                        <Typography variant="caption" color="text.secondary">{t('map.highCoverage')}</Typography>
                       </Stack>
                     </Stack>
                   )}
@@ -124,14 +126,14 @@ function LiveMapPage() {
               <Card className="hover-lift glow-card" sx={{ borderRadius: 3 }}>
                 <CardContent sx={{ p: 2.5 }}>
                   <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1.2 }}>
-                    Priority Levels
+                    {t('map.priorityLevels')}
                   </Typography>
                   <Stack spacing={0.8}>
                     {[
-                      { label: 'CRITICAL', color: '#ef4444', desc: 'Medical / emergency supplies' },
-                      { label: 'HIGH', color: '#f97316', desc: 'Remote area deliveries' },
-                      { label: 'MEDIUM', color: '#eab308', desc: 'Standard SME deliveries' },
-                      { label: 'LOW', color: '#22c55e', desc: 'Non-urgent packages' },
+                      { label: t('map.critical'), color: '#ef4444', desc: t('map.medicalSupplies') },
+                      { label: t('map.high'), color: '#f97316', desc: t('map.remoteDeliveries') },
+                      { label: t('map.medium'), color: '#eab308', desc: t('map.standardSME') },
+                      { label: t('map.low'), color: '#22c55e', desc: t('map.nonUrgent') },
                     ].map((p) => (
                       <Stack key={p.label} direction="row" alignItems="center" spacing={1}>
                         <Chip
@@ -161,15 +163,13 @@ function LiveMapPage() {
               <Card className="hover-lift glow-card" sx={{ borderRadius: 3 }}>
                 <CardContent sx={{ p: 2.5 }}>
                   <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>
-                    Coordination Snapshot
+                    {t('map.coordSnapshot')}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ mb: 1, lineHeight: 1.7 }}>
-                    The AI engine staggers departures and path vectors to reduce overlap risk and avoid
-                    mid-route conflicts. Rural and critical deliveries are prioritized when swarm logic is enabled.
+                    {t('map.coordDesc1')}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                    Hover over any drone marker to see real-time info including drone ID, parcels assigned,
-                    battery level, and estimated time of arrival.
+                    {t('map.coordDesc2')}
                   </Typography>
                 </CardContent>
               </Card>

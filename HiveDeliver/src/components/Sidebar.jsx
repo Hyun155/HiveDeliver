@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import {
   Box,
   List,
@@ -16,16 +17,18 @@ import { GiDeliveryDrone } from 'react-icons/gi'
 export const drawerWidth = 270
 
 const navItems = [
-  { label: 'Home', path: '/home', icon: <FaHouse /> },
-  { label: 'Delivery Dashboard', path: '/dashboard', icon: <HiCubeTransparent /> },
-  { label: 'Live Drone Map', path: '/map', icon: <HiMap /> },
-  { label: 'Create Delivery Order', path: '/order', icon: <FaClipboardList /> },
-  { label: 'Swarm Intelligence', path: '/intelligence', icon: <HiCpuChip /> },
-  { label: 'Analytics', path: '/analytics', icon: <HiChartBarSquare /> },
-  { label: 'Fleet Management', path: '/fleet', icon: <GiDeliveryDrone /> },
+  { key: 'home', path: '/home', icon: <FaHouse /> },
+  { key: 'dashboard', path: '/dashboard', icon: <HiCubeTransparent /> },
+  { key: 'map', path: '/map', icon: <HiMap /> },
+  { key: 'order', path: '/order', icon: <FaClipboardList /> },
+  { key: 'intelligence', path: '/intelligence', icon: <HiCpuChip /> },
+  { key: 'analytics', path: '/analytics', icon: <HiChartBarSquare /> },
+  { key: 'fleet', path: '/fleet', icon: <GiDeliveryDrone /> },
 ]
 
 function Sidebar({ onNavigate }) {
+  const { t } = useTranslation()
+
   return (
     <Box sx={{ height: '100%', p: 2.5, display: 'flex', flexDirection: 'column' }}>
       {/* Logo */}
@@ -60,10 +63,10 @@ function Sidebar({ onNavigate }) {
         </Box>
         <Stack spacing={0}>
           <Typography variant="h6" sx={{ lineHeight: 1.1, fontWeight: 800, fontSize: '1.05rem' }}>
-            HiveDeliver
+            {t('common.appName')}
           </Typography>
           <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 500, letterSpacing: '0.04em' }}>
-            AI Swarm Logistics
+            {t('common.tagline')}
           </Typography>
         </Stack>
       </Stack>
@@ -102,7 +105,7 @@ function Sidebar({ onNavigate }) {
               {item.icon}
             </ListItemIcon>
             <ListItemText
-              primary={item.label}
+              primary={t(`nav.${item.key}`)}
               primaryTypographyProps={{
                 fontWeight: 600,
                 fontSize: '0.84rem',
@@ -123,7 +126,7 @@ function Sidebar({ onNavigate }) {
         }}
       >
         <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.68rem' }}>
-          v2.0 Swarm Engine
+          {t('common.version')}
         </Typography>
       </Box>
     </Box>

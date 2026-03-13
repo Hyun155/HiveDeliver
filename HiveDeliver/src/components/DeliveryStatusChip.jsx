@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Chip, Box } from '@mui/material'
 
 const paletteByStatus = {
@@ -6,12 +7,19 @@ const paletteByStatus = {
   Waiting: { bg: 'rgba(234,179,8,0.1)', color: '#a16207', border: 'rgba(234,179,8,0.2)', dot: '#eab308' },
 }
 
+const statusKeyMap = {
+  Delivering: 'dashboard.delivering',
+  Delivered: 'dashboard.delivered',
+  Waiting: 'dashboard.waiting',
+}
+
 function DeliveryStatusChip({ status }) {
+  const { t } = useTranslation()
   const palette = paletteByStatus[status] || { bg: '#e2e8f0', color: '#334155', border: '#cbd5e1', dot: '#94a3b8' }
 
   return (
     <Chip
-      label={status}
+      label={t(statusKeyMap[status] || status)}
       size="small"
       icon={
         <Box
