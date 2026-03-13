@@ -1,15 +1,7 @@
+import { useTranslation } from 'react-i18next'
 import { Card, CardContent, Grid, Stack, Typography, Box, Chip } from '@mui/material'
 import PageHeader from '../components/PageHeader.jsx'
 import SwarmNetworkMini from '../components/SwarmNetworkMini.jsx'
-import { swarmMetrics } from '../data/mockData.js'
-
-const healthFeed = [
-  { text: 'Collision avoidance model refreshed 20 seconds ago', type: 'success' },
-  { text: 'Drone H2 rerouted to avoid dense no-fly zone corridor', type: 'warning' },
-  { text: 'Weather compensation active for westbound fleet lane', type: 'info' },
-  { text: 'Swarm consensus heartbeat stable at 99.4%', type: 'success' },
-  { text: 'Battery optimization protocol engaged for H5, H7', type: 'info' },
-]
 
 const feedColors = {
   success: { dot: '#22c55e', bg: 'rgba(34,197,94,0.06)', border: 'rgba(34,197,94,0.12)' },
@@ -17,19 +9,36 @@ const feedColors = {
   info: { dot: '#0ea5e9', bg: 'rgba(14,165,233,0.06)', border: 'rgba(14,165,233,0.12)' },
 }
 
+const feedItems = [
+  { key: 'feed1', type: 'success' },
+  { key: 'feed2', type: 'warning' },
+  { key: 'feed3', type: 'info' },
+  { key: 'feed4', type: 'success' },
+  { key: 'feed5', type: 'info' },
+]
+
 function IntelligencePage() {
+  const { t } = useTranslation()
+
+  const swarmMetrics = [
+    { labelKey: 'intelligence.activeDroneSwarm', value: 18 },
+    { labelKey: 'intelligence.collisionAvoidance', value: t('intelligence.active') },
+    { labelKey: 'intelligence.routeOptimization', value: t('intelligence.running') },
+    { labelKey: 'intelligence.swarmEfficiency', value: '94%' },
+  ]
+
   return (
     <Stack spacing={2.5}>
       <Box className="reveal-up">
         <PageHeader
-          title="Hive Swarm Intelligence Panel"
-          subtitle="Observe live AI system status for coordination, safety, and efficiency."
+          title={t('intelligence.title')}
+          subtitle={t('intelligence.subtitle')}
         />
       </Box>
 
       <Grid container spacing={1.5}>
         {swarmMetrics.map((metric, i) => (
-          <Grid key={metric.label} size={{ xs: 12, sm: 6, lg: 3 }}>
+          <Grid key={metric.labelKey} size={{ xs: 12, sm: 6, lg: 3 }}>
             <Box className={`reveal-up delay-${i + 1}`}>
               <Card className="hover-lift glow-card" sx={{ height: '100%', borderRadius: 3 }}>
                 <CardContent sx={{ p: 2.5 }}>
@@ -38,7 +47,7 @@ function IntelligencePage() {
                     color="text.secondary"
                     sx={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', fontSize: '0.68rem' }}
                   >
-                    {metric.label}
+                    {t(metric.labelKey)}
                   </Typography>
                   <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 0.8 }}>
                     <Typography variant="h5" sx={{ fontWeight: 800 }}>
@@ -76,10 +85,10 @@ function IntelligencePage() {
               <CardContent sx={{ p: 2.5 }}>
                 <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
                   <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                    AI Health Feed
+                    {t('intelligence.aiHealthFeed')}
                   </Typography>
                   <Chip
-                    label="LIVE"
+                    label={t('common.live')}
                     size="small"
                     icon={
                       <Box
@@ -104,7 +113,7 @@ function IntelligencePage() {
                   />
                 </Stack>
                 <Stack spacing={1}>
-                  {healthFeed.map((log, i) => {
+                  {feedItems.map((log, i) => {
                     const colors = feedColors[log.type]
                     return (
                       <Box
@@ -135,7 +144,7 @@ function IntelligencePage() {
                           }}
                         />
                         <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.82rem', lineHeight: 1.5 }}>
-                          {log.text}
+                          {t(`intelligence.${log.key}`)}
                         </Typography>
                       </Box>
                     )

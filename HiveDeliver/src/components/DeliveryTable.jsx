@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import {
   Paper,
   Table,
@@ -12,6 +13,8 @@ import {
 import DeliveryStatusChip from './DeliveryStatusChip.jsx'
 
 function DeliveryTable({ rows }) {
+  const { t } = useTranslation()
+
   return (
     <TableContainer
       component={Paper}
@@ -21,10 +24,10 @@ function DeliveryTable({ rows }) {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Parcel ID</TableCell>
-            <TableCell>Destination</TableCell>
-            <TableCell>Assigned Drone</TableCell>
-            <TableCell align="right">Status</TableCell>
+            <TableCell>{t('dashboard.parcelId')}</TableCell>
+            <TableCell>{t('dashboard.destination')}</TableCell>
+            <TableCell>{t('dashboard.assignedDrone')}</TableCell>
+            <TableCell align="right">{t('dashboard.status')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

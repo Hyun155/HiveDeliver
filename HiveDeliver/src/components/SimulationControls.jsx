@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import {
   Box,
   Button,
@@ -36,11 +37,13 @@ function SimulationControls({
   showNoFlyZones,
   onToggleNoFlyZones,
 }) {
+  const { t } = useTranslation()
+
   return (
     <Card className="hover-lift" sx={{ height: '100%' }}>
       <CardContent>
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
-          Simulation Controls
+          {t('controls.title')}
         </Typography>
 
         {/* Playback Controls */}
@@ -52,7 +55,7 @@ function SimulationControls({
             onClick={onToggleRunning}
             sx={{ textTransform: 'none', fontWeight: 600, flex: 1 }}
           >
-            {isRunning ? 'Pause' : 'Start'}
+            {isRunning ? t('controls.pause') : t('controls.start')}
           </Button>
           <Button
             variant="outlined"
@@ -61,7 +64,7 @@ function SimulationControls({
             onClick={onReset}
             sx={{ textTransform: 'none', fontWeight: 600, flex: 1 }}
           >
-            Reset
+            {t('controls.reset')}
           </Button>
         </Stack>
 
@@ -72,7 +75,7 @@ function SimulationControls({
           <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 0.5 }}>
             <FlightIcon fontSize="small" color="primary" />
             <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-              Number of Drones
+              {t('controls.numDrones')}
             </Typography>
             <Chip
               label={droneCount}
@@ -101,7 +104,7 @@ function SimulationControls({
           <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 0.5 }}>
             <SpeedIcon fontSize="small" color="primary" />
             <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-              Delivery Speed
+              {t('controls.deliverySpeed')}
             </Typography>
             <Chip
               label={`${speed}x`}
@@ -142,7 +145,7 @@ function SimulationControls({
               <Stack direction="row" alignItems="center" spacing={1}>
                 {showHeatmap ? <LayersIcon fontSize="small" /> : <MapIcon fontSize="small" />}
                 <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                  {showHeatmap ? 'Heatmap View' : 'Map View'}
+                  {showHeatmap ? t('controls.heatmapView') : t('controls.mapView')}
                 </Typography>
               </Stack>
             }
@@ -160,7 +163,7 @@ function SimulationControls({
               <Stack direction="row" alignItems="center" spacing={1}>
                 <PriorityHighIcon fontSize="small" color={priorityMode ? 'warning' : 'disabled'} />
                 <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                  Priority / Swarm Logic
+                  {t('controls.prioritySwarm')}
                 </Typography>
               </Stack>
             }
@@ -178,7 +181,7 @@ function SimulationControls({
               <Stack direction="row" alignItems="center" spacing={1}>
                 <BlockIcon fontSize="small" color={showNoFlyZones ? 'error' : 'disabled'} />
                 <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                  No-Fly Zones
+                  {t('controls.noFlyZones')}
                 </Typography>
               </Stack>
             }
@@ -190,32 +193,32 @@ function SimulationControls({
         {/* Status Info */}
         <Box sx={{ p: 1.5, borderRadius: 2, bgcolor: 'action.hover' }}>
           <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1 }}>
-            Simulation Status
+            {t('controls.simStatus')}
           </Typography>
           <Stack spacing={0.5} sx={{ mt: 1 }}>
             <Stack direction="row" justifyContent="space-between">
-              <Typography variant="body2" color="text.secondary">State</Typography>
+              <Typography variant="body2" color="text.secondary">{t('controls.state')}</Typography>
               <Chip
-                label={isRunning ? 'Running' : 'Paused'}
+                label={isRunning ? t('controls.running') : t('controls.paused')}
                 size="small"
                 color={isRunning ? 'success' : 'default'}
                 sx={{ fontWeight: 600 }}
               />
             </Stack>
             <Stack direction="row" justifyContent="space-between">
-              <Typography variant="body2" color="text.secondary">Active Drones</Typography>
+              <Typography variant="body2" color="text.secondary">{t('controls.activeDrones')}</Typography>
               <Typography variant="body2" sx={{ fontWeight: 600 }}>{droneCount}</Typography>
             </Stack>
             <Stack direction="row" justifyContent="space-between">
-              <Typography variant="body2" color="text.secondary">Mode</Typography>
+              <Typography variant="body2" color="text.secondary">{t('controls.mode')}</Typography>
               <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                {priorityMode ? 'Priority Routing' : 'Standard'}
+                {priorityMode ? t('controls.priorityRouting') : t('controls.standard')}
               </Typography>
             </Stack>
             <Stack direction="row" justifyContent="space-between">
-              <Typography variant="body2" color="text.secondary">View</Typography>
+              <Typography variant="body2" color="text.secondary">{t('controls.view')}</Typography>
               <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                {showHeatmap ? 'Heatmap' : 'Routes'}
+                {showHeatmap ? t('controls.heatmap') : t('controls.routes')}
               </Typography>
             </Stack>
           </Stack>

@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Box, Button, Card, CardContent, Grid, Stack, Typography, Chip } from '@mui/material'
 import { FaBoxOpen, FaWarehouse, FaArrowRight, FaShieldHalved, FaBolt, FaRoute } from 'react-icons/fa6'
 import { GiDeliveryDrone } from 'react-icons/gi'
 import { HiCpuChip } from 'react-icons/hi2'
 import PageHeader from '../components/PageHeader.jsx'
-import { benefits } from '../data/mockData.js'
 
 const benefitIcons = [
   <FaBolt key="fast" />,
@@ -13,21 +13,24 @@ const benefitIcons = [
   <FaShieldHalved key="route" />,
 ]
 
-const stats = [
-  { value: '99.4%', label: 'Uptime' },
-  { value: '< 14min', label: 'Avg Delivery' },
-  { value: '500+', label: 'Daily Deliveries' },
-]
+const benefitKeys = ['faster', 'lowerCost', 'aiSwarm', 'smartRoute']
 
 function LandingPage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
+
+  const stats = [
+    { value: '99.4%', label: t('landing.uptime') },
+    { value: '< 14min', label: t('landing.avgDelivery') },
+    { value: '500+', label: t('landing.dailyDeliveries') },
+  ]
 
   return (
     <Stack spacing={3}>
       <Box className="reveal-up">
         <PageHeader
-          title="HiveDeliver - AI Swarm Drone Delivery"
-          subtitle="Autonomous last-mile delivery powered by intelligent drone swarms."
+          title={t('landing.title')}
+          subtitle={t('landing.subtitle')}
         />
       </Box>
 
@@ -37,7 +40,7 @@ function LandingPage() {
           <Grid container spacing={3} alignItems="center">
             <Grid size={{ xs: 12, md: 7 }}>
               <Chip
-                label="AI-Powered Logistics"
+                label={t('landing.chip')}
                 size="small"
                 sx={{
                   mb: 2,
@@ -51,14 +54,13 @@ function LandingPage() {
                 }}
               />
               <Typography variant="h3" sx={{ mb: 1.5, lineHeight: 1.1, fontSize: { xs: '1.8rem', md: '2.6rem' } }}>
-                Intelligent Drone Swarms for Last-Mile Delivery
+                {t('landing.heroTitle')}
               </Typography>
               <Typography
                 variant="body1"
                 sx={{ mb: 3, maxWidth: 560, opacity: 0.85, lineHeight: 1.7, fontSize: '1.02rem' }}
               >
-                Our AI-powered swarm coordinates autonomous drones to deliver packages faster,
-                cheaper, and smarter — optimized for SMEs across urban and rural areas.
+                {t('landing.heroDesc')}
               </Typography>
 
               <Stack direction="row" spacing={1.5} flexWrap="wrap">
@@ -84,7 +86,7 @@ function LandingPage() {
                     },
                   }}
                 >
-                  Open Dashboard
+                  {t('landing.openDashboard')}
                 </Button>
                 <Button
                   variant="outlined"
@@ -105,7 +107,7 @@ function LandingPage() {
                     },
                   }}
                 >
-                  Live Map
+                  {t('landing.liveMap')}
                 </Button>
               </Stack>
 
@@ -141,19 +143,19 @@ function LandingPage() {
                 <Stack direction="row" spacing={1.5} justifyContent="space-between" sx={{ mb: 1.5 }}>
                   <Box className="node-card">
                     <FaWarehouse style={{ fontSize: 26 }} />
-                    <Typography variant="caption" sx={{ fontWeight: 600 }}>Warehouse</Typography>
+                    <Typography variant="caption" sx={{ fontWeight: 600 }}>{t('landing.warehouse')}</Typography>
                   </Box>
                   <Box className="node-card floating">
                     <GiDeliveryDrone style={{ fontSize: 28 }} />
-                    <Typography variant="caption" sx={{ fontWeight: 600 }}>Drone Swarm</Typography>
+                    <Typography variant="caption" sx={{ fontWeight: 600 }}>{t('landing.droneSwarm')}</Typography>
                   </Box>
                   <Box className="node-card">
                     <FaBoxOpen style={{ fontSize: 26 }} />
-                    <Typography variant="caption" sx={{ fontWeight: 600 }}>Packages</Typography>
+                    <Typography variant="caption" sx={{ fontWeight: 600 }}>{t('landing.packages')}</Typography>
                   </Box>
                 </Stack>
                 <Typography variant="body2" sx={{ opacity: 0.75, textAlign: 'center', mt: 1 }}>
-                  Drone swarms coordinate routes from warehouse to SME destinations in real time.
+                  {t('landing.illustrationDesc')}
                 </Typography>
               </Box>
             </Grid>
@@ -164,11 +166,11 @@ function LandingPage() {
       {/* Benefits Section */}
       <Box className="reveal-up delay-3">
         <Typography variant="h5" sx={{ mb: 2 }}>
-          Why <span className="gradient-text">HiveDeliver</span>?
+          {t('landing.whyTitlePlain')}
         </Typography>
         <Grid container spacing={1.5}>
-          {benefits.map((benefit, i) => (
-            <Grid key={benefit.title} size={{ xs: 12, sm: 6 }}>
+          {benefitKeys.map((key, i) => (
+            <Grid key={key} size={{ xs: 12, sm: 6 }}>
               <Card
                 className={`hover-lift glow-card reveal-up delay-${i + 2}`}
                 sx={{ height: '100%', borderRadius: 3 }}
@@ -178,10 +180,10 @@ function LandingPage() {
                     {benefitIcons[i]}
                   </Box>
                   <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.6 }}>
-                    {benefit.title}
+                    {t(`benefits.${key}Title`)}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                    {benefit.description}
+                    {t(`benefits.${key}Desc`)}
                   </Typography>
                 </CardContent>
               </Card>
