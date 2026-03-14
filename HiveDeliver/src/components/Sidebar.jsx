@@ -1,5 +1,4 @@
-import { NavLink } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { NavLink, useNavigate } from 'react-router-dom'
 import {
   Box,
   List,
@@ -9,30 +8,42 @@ import {
   Stack,
   Typography,
   Divider,
+  Button,
 } from '@mui/material'
 import { HiCubeTransparent, HiMap, HiChartBarSquare, HiCpuChip } from 'react-icons/hi2'
 import { FaHouse, FaClipboardList } from 'react-icons/fa6'
 import { GiDeliveryDrone } from 'react-icons/gi'
+import { MdLogout } from 'react-icons/md'
+import { useAuth } from '../contexts/AuthContext.jsx'
 
 export const drawerWidth = 270
 
-const navItems = [
-  { key: 'home', path: '/home', icon: <FaHouse /> },
-  { key: 'dashboard', path: '/dashboard', icon: <HiCubeTransparent /> },
-  { key: 'map', path: '/map', icon: <HiMap /> },
-  { key: 'order', path: '/order', icon: <FaClipboardList /> },
-  { key: 'intelligence', path: '/intelligence', icon: <HiCpuChip /> },
-  { key: 'analytics', path: '/analytics', icon: <HiChartBarSquare /> },
-  { key: 'fleet', path: '/fleet', icon: <GiDeliveryDrone /> },
+const allNavItems = [
+  { label: 'Home', path: '/home', icon: <FaHouse />, roles: ['admin', 'manager', 'user'] },
+  { label: 'Delivery Dashboard', path: '/dashboard', icon: <HiCubeTransparent />, roles: ['admin', 'manager'] },
+  { label: 'Live Drone Map', path: '/map', icon: <HiMap />, roles: ['admin', 'manager', 'user'] },
+  { label: 'Create Delivery Order', path: '/order', icon: <FaClipboardList />, roles: ['admin', 'manager', 'user'] },
+  { label: 'Swarm Intelligence', path: '/intelligence', icon: <HiCpuChip />, roles: ['admin'] },
+  { label: 'Analytics', path: '/analytics', icon: <HiChartBarSquare />, roles: ['admin', 'manager'] },
+  { label: 'Fleet Management', path: '/fleet', icon: <GiDeliveryDrone />, roles: ['admin'] },
 ]
 
 function Sidebar({ onNavigate }) {
-  const { t } = useTranslation()
+  const { logout, user } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login', { replace: true })
+  }
+
+  // Filter nav items based on user role
+  const userRole = user?.role || 'user'
+  const navItems = allNavItems.filter((item) => item.roles.includes(userRole))
 
   return (
-    <Box sx={{ height: '100%', p: 2.5, display: 'flex', flexDirection: 'column' }}>
-      {/* Logo */}
-      <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 1, px: 0.5 }}>
+    <Box sx={{ height: '100%', p: 2.2, display: 'flex', flexDirection: 'column' }}>
+      <Stack direction="row" spacing={1.2} alignItems="center" sx={{ mb: 2.2, px: 1 }}>
         <Box
           sx={{
             width: 42,
@@ -71,9 +82,6 @@ function Sidebar({ onNavigate }) {
         </Stack>
       </Stack>
 
-      <Divider sx={{ my: 1.5, opacity: 0.15 }} />
-
-      {/* Navigation */}
       <List sx={{ p: 0, flex: 1 }}>
         {navItems.map((item) => (
           <ListItemButton
@@ -115,20 +123,17 @@ function Sidebar({ onNavigate }) {
         ))}
       </List>
 
-      {/* Footer */}
-      <Box
-        sx={{
-          mt: 'auto',
-          pt: 2,
-          borderTop: '1px solid',
-          borderColor: 'divider',
-          opacity: 0.6,
-        }}
+      <Divider sx={{ my: 2 }} />
+      <Button
+        fullWidth
+        variant="outlined"
+        color="error"
+        startIcon={<MdLogout />}
+        onClick={handleLogout}
+        sx={{ fontWeight: 600 }}
       >
-        <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.68rem' }}>
-          {t('common.version')}
-        </Typography>
-      </Box>
+        Logout
+      </Button>
     </Box>
   )
 }

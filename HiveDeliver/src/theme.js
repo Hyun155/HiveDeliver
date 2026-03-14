@@ -26,8 +26,8 @@ export function createAppTheme(mode) {
             text: { primary: '#e8f4f8', secondary: '#8ba3b0' },
           }
         : {
-            background: { default: '#f0f6f8', paper: '#ffffff' },
-            text: { primary: '#0c1824', secondary: '#4a6275' },
+            background: { default: '#0d1b22', paper: '#132330' },
+            text: { primary: '#00ffcc', secondary: '#00ff99' },
           }),
     },
     shape: { borderRadius: 16 },
