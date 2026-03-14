@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import { Box, Button, Card, CardContent, Grid, Stack, Typography } from '@mui/material'
-import { FaBoxOpen, FaWarehouse } from 'react-icons/fa6'
+import { useTranslation } from 'react-i18next'
+import { Box, Button, Card, CardContent, Grid, Stack, Typography, Chip } from '@mui/material'
+import { FaBoxOpen, FaWarehouse, FaArrowRight, FaShieldHalved, FaBolt, FaRoute } from 'react-icons/fa6'
 import { GiDeliveryDrone } from 'react-icons/gi'
 import { useAuth } from '../contexts/AuthContext.jsx'
 import { benefits } from '../data/mockData.js'
@@ -215,13 +216,20 @@ function LandingPage() {
                     boxShadow: '0 15px 40px rgba(15, 118, 110, 0.15)',
                   },
                 }}
+              />
+              <Typography variant="h3" sx={{ mb: 1.5, lineHeight: 1.1, fontSize: { xs: '1.8rem', md: '2.6rem' } }}>
+                {t('landing.heroTitle')}
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ mb: 3, maxWidth: 560, opacity: 0.85, lineHeight: 1.7, fontSize: '1.02rem' }}
               >
                 <CardContent>
                   <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.8 }}>
                     {benefit.title}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {benefit.description}
+                  <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                    {t(`benefits.${key}Desc`)}
                   </Typography>
                 </CardContent>
               </Card>
