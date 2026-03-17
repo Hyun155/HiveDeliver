@@ -251,6 +251,9 @@
     "cancelled": "Dibatalkan",
     "failed": "Gagal",
     "noResults": "Tiada penghantaran sepadan dengan penapis semasa.",
+    "recipient": "Penerima",
+    "weight": "Berat",
+    "note": "Nota",
     "feedbackTitle": "Maklum Balas Anda Penting",
     "feedbackSubtitle": "Imbas kod QR untuk memberitahu kami tentang pengalaman anda!",
     "scanPrompt": "Imbas untuk memberikan maklum balas"
