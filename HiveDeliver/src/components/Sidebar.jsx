@@ -101,7 +101,7 @@ function Sidebar({ onNavigate }) {
   const { logout, user } = useAuth()
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const brandLogo = '/hivedeliver-logo.svg'
+  const brandLogo = '/hivedeliver-logo.png'
 
   const handleLogout = () => {
     logout();
