@@ -254,6 +254,9 @@
     "cancelled": "Cancelled",
     "failed": "Failed",
     "noResults": "No deliveries match the current filters.",
+    "recipient": "Recipient",
+    "weight": "Weight",
+    "note": "Note",
     "feedbackTitle": "Your Feedback Matters",
     "feedbackSubtitle": "Scan the QR code to tell us about your experience!",
     "scanPrompt": "Scan to provide feedback"
