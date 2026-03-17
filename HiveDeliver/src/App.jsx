@@ -14,6 +14,7 @@ import FleetPage from "./pages/FleetPage.jsx";
 import DeliveryHistory from "./pages/DeliveryHistory.jsx";
 import SavedAddresses from "./pages/SavedAddresses.jsx";
 import NotificationsPage from "./pages/NotificationsPage.jsx";
+import SupportChatbotPage from "./pages/SupportChatbotPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import RequireAuth from "./components/RequireAuth.jsx";
@@ -63,6 +64,7 @@ function App() {
             <Route path="/history" element={<DeliveryHistory />} />
             <Route path="/addresses" element={<SavedAddresses />} />
             <Route path="/notifications" element={<NotificationsPage />} />
+            <Route path="/support" element={<SupportChatbotPage />} />
             <Route path="/intelligence" element={<IntelligencePage />} />
             <Route path="/analytics" element={<AnalyticsPage />} />
             <Route path="/fleet" element={<FleetPage />} />

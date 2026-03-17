@@ -17,8 +17,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { FaClockRotateLeft } from 'react-icons/fa6'
+import { FaClockRotateLeft, FaQrcode } from 'react-icons/fa6'
 import PageHeader from '../components/PageHeader.jsx'
+import { useAuth } from '../contexts/AuthContext.jsx'
 import { deliveryHistoryRecords } from '../data/clientFeaturesData.js'
 
 const statusPalette = {
@@ -29,9 +30,12 @@ const statusPalette = {
 
 // Placeholder Google Form URL - user can replace this
 const FEEDBACK_FORM_URL = "https://forms.gle/placeholder";
+// Simple QR code placeholder data URL
+const qrCodeUrl = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23fff' width='200' height='200'/%3E%3Crect fill='%23000' x='20' y='20' width='40' height='40'/%3E%3Crect fill='%23000' x='140' y='20' width='40' height='40'/%3E%3Crect fill='%23000' x='20' y='140' width='40' height='40'/%3E%3C/svg%3E";
 
 function DeliveryHistory() {
   const { t } = useTranslation()
+  const { user } = useAuth()
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState('all')
   const [date, setDate] = useState('')
@@ -40,6 +44,10 @@ function DeliveryHistory() {
     const normalized = search.trim().toLowerCase()
 
     return deliveryHistoryRecords.filter((row) => {
+      // SME users (role: 'user') can only see their own parcels
+      // Managers can see all parcels
+      const isOwnedByUser = user.role === 'manager' || row.userId === user.id;
+
       const matchesSearch = !normalized
         || row.id.toLowerCase().includes(normalized)
         || row.address.toLowerCase().includes(normalized)
@@ -48,9 +56,9 @@ function DeliveryHistory() {
       const matchesStatus = status === "all" || row.status === status;
       const matchesDate = !date || row.date === date;
 
-      return matchesSearch && matchesStatus && matchesDate
+      return isOwnedByUser && matchesSearch && matchesStatus && matchesDate
     })
-  }, [search, status, date])
+  }, [search, status, date, user.id, user.role])
 
   return (
     <Stack spacing={2.5}>

@@ -116,7 +116,7 @@ function SavedAddresses() {
 
         <Grid container spacing={1.5}>
           {addresses.map((item, index) => (
-            <Grid key={item.id} size={{ xs: 12, md: 6, xl: 4 }}>
+            <Grid key={item.id} xs={12} md={6} xl={4}>
               <Box className={`reveal-up delay-${Math.min(index + 2, 5)}`}>
                 <Card className="hover-lift glow-card" sx={{ borderRadius: 3, height: '100%' }}>
                   <CardContent sx={{ p: 2.2 }}>

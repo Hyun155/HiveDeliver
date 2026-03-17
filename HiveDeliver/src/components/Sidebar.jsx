@@ -17,7 +17,7 @@ import {
   HiChartBarSquare,
   HiCpuChip,
 } from "react-icons/hi2";
-import { FaHouse, FaClipboardList, FaLocationDot } from "react-icons/fa6";
+import { FaHouse, FaClipboardList, FaLocationDot, FaRobot } from "react-icons/fa6";
 import { GiDeliveryDrone } from "react-icons/gi";
 import { MdHistory, MdLogout, MdNotificationsNone } from "react-icons/md";
 import { useAuth } from "../contexts/AuthContext.jsx";
@@ -95,6 +95,13 @@ const allNavItems = [
     icon: <GiDeliveryDrone />,
     roles: ["admin"],
   },
+  {
+    key: "support",
+    label: "Support Chatbot",
+    path: "/support",
+    icon: <FaRobot />,
+    roles: ["admin", "manager", "user"],
+  },
 ];
 
 function Sidebar({ onNavigate }) {
@@ -129,10 +136,7 @@ function Sidebar({ onNavigate }) {
           sx={{
             width: 42,
             height: 42,
-            borderRadius: 2,
             objectFit: 'cover',
-            boxShadow: '0 6px 20px rgba(15,118,110,0.35)',
-            border: '1px solid rgba(15,118,110,0.2)',
           }}
         />
         <Stack spacing={0}>
@@ -152,7 +156,7 @@ function Sidebar({ onNavigate }) {
         </Stack>
       </Stack>
 
-      <List sx={{ p: 0, flex: 1 }}>
+      <List sx={{ p: 0, mb: 1.5 }}>
         {navItems.map((item) => (
           <ListItemButton
             key={item.path}
@@ -195,7 +199,10 @@ function Sidebar({ onNavigate }) {
         ))}
       </List>
 
+      <Box sx={{ flex: 1 }} />
+
       <Divider sx={{ my: 2 }} />
+
       <Button
         fullWidth
         variant="outlined"

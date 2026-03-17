@@ -23,9 +23,7 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import TranslateIcon from '@mui/icons-material/Translate'
 import Sidebar, { drawerWidth } from './Sidebar.jsx'
 import { useColorMode } from '../ColorModeContext.jsx'
-import Chatbot from './Chatbot.jsx'
 import NotificationPanel from './NotificationPanel.jsx'
-import { FaRobot } from 'react-icons/fa'
 import { languages } from '../i18n/i18n.js'
 
 const pathToKey = {
@@ -36,6 +34,7 @@ const pathToKey = {
   '/history': 'history',
   '/addresses': 'addresses',
   '/notifications': 'notifications',
+  '/support': 'support',
   '/intelligence': 'intelligence',
   '/analytics': 'analytics',
   '/fleet': 'fleet',
@@ -54,8 +53,6 @@ function AppShell({ children }) {
     const key = pathToKey[location.pathname] || 'home'
     return t(`pageTitles.${key}`)
   }, [location.pathname, t])
-
-  const [chatbotOpen, setChatbotOpen] = useState(false)
 
   // Language menu state
   const [langAnchor, setLangAnchor] = useState(null)
@@ -260,31 +257,6 @@ function AppShell({ children }) {
               {isDark ? <LightModeOutlinedIcon fontSize="small" /> : <DarkModeOutlinedIcon fontSize="small" />}
             </IconButton>
           </Tooltip>
-
-          <Tooltip title={t('common.aiChatbot')}>
-            <IconButton
-              onClick={() => setChatbotOpen((open) => !open)}
-              sx={{
-                background: chatbotOpen
-                  ? 'linear-gradient(135deg, #0f766e, #14b8a6)'
-                  : 'transparent',
-                color: chatbotOpen ? '#ffffff' : 'primary.main',
-                border: '1px solid',
-                borderColor: chatbotOpen ? 'transparent' : 'divider',
-                borderRadius: 2,
-                width: 38,
-                height: 38,
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  background: chatbotOpen
-                    ? 'linear-gradient(135deg, #115e59, #0f766e)'
-                    : 'rgba(20,184,166,0.08)',
-                },
-              }}
-            >
-              <FaRobot size={16} />
-            </IconButton>
-          </Tooltip>
         </Toolbar>
       </AppBar>
 
@@ -338,21 +310,6 @@ function AppShell({ children }) {
       >
         <Toolbar />
         {children}
-
-        {/* Chatbot */}
-        {chatbotOpen && (
-          <Box
-            sx={{
-              position: 'fixed',
-              bottom: 24,
-              right: 24,
-              zIndex: 1300,
-              animation: 'revealScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) both',
-            }}
-          >
-            <Chatbot />
-          </Box>
-        )}
       </Box>
     </Box>
   )

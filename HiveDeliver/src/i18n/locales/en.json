@@ -248,6 +248,21 @@
     "feedbackSubtitle": "Scan the QR code to tell us about your experience!",
     "scanPrompt": "Scan to provide feedback"
   },
+  "addresses": {
+    "title": "Saved Addresses",
+    "subtitle": "Manage your frequently used delivery locations for faster order creation.",
+    "totalSaved": "{{count}} saved addresses",
+    "addNew": "Add New Address",
+    "editAddress": "Edit Address",
+    "addAddress": "Add New Address",
+    "addressLabel": "Address Label",
+    "contactName": "Contact Name",
+    "contactPhone": "Contact Phone",
+    "fullAddress": "Full Address",
+    "saveAddress": "Save Address",
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel"
+  },
   "notifications": {
     "panelTitle": "Delivery Notifications",
     "pageTitle": "Notifications",
