@@ -125,7 +125,7 @@ function Sidebar({ onNavigate }) {
         onClick={handleLogout}
         sx={{ fontWeight: 600 }}
       >
-        Logout
+        {t('nav.logout')}
       </Button>
     </Box>
   )

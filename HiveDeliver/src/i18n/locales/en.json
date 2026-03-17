@@ -24,7 +24,8 @@
     "fleet": "Fleet Management",
     "security": "Security & Blockchain",
     "optimization": "Swarm Optimization",
-    "interactive": "Interactive Features"
+    "interactive": "Interactive Features",
+    "logout": "Logout"
   },
   "pageTitles": {
     "home": "HiveDeliver Platform",
