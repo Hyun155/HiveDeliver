@@ -20,6 +20,7 @@ import {
 import { FaClockRotateLeft } from 'react-icons/fa6'
 import PageHeader from '../components/PageHeader.jsx'
 import { deliveryHistoryRecords } from '../data/clientFeaturesData.js'
+import { useAuth } from '../contexts/AuthContext.jsx'
 
 const statusPalette = {
   Delivered: { color: '#22c55e', bg: 'rgba(34,197,94,0.14)' },
@@ -29,14 +30,24 @@ const statusPalette = {
 
 function DeliveryHistory() {
   const { t } = useTranslation()
+  const { user } = useAuth()
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState('all')
   const [date, setDate] = useState('')
 
   const filteredRows = useMemo(() => {
     const normalized = search.trim().toLowerCase()
+    const userRole = user?.role || 'user'
+    const userId = user?.id
 
-    return deliveryHistoryRecords.filter((row) => {
+    let records = deliveryHistoryRecords
+
+    // For SME users, filter to only their orders
+    if (userRole === 'user' && userId) {
+      records = records.filter((row) => row.userId === userId)
+    }
+
+    return records.filter((row) => {
       const matchesSearch = !normalized
         || row.id.toLowerCase().includes(normalized)
         || row.address.toLowerCase().includes(normalized)
@@ -47,7 +58,7 @@ function DeliveryHistory() {
 
       return matchesSearch && matchesStatus && matchesDate
     })
-  }, [search, status, date])
+  }, [search, status, date, user])
 
   return (
     <Stack spacing={2.5}>

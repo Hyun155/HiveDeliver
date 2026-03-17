@@ -9,6 +9,13 @@ const defaultUsers = [
     role: 'manager',
     name: 'Manager',
   },
+  {
+    id: 'user-1',
+    email: 'user@hivedeliver.com',
+    password: 'user123',
+    role: 'user',
+    name: 'SME User',
+  },
 ]
 
 function _loadJSON(key) {

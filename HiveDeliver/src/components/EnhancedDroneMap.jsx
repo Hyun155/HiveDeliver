@@ -90,6 +90,7 @@ function EnhancedDroneMap({
   showNoFlyZones = true,
   onSwarmStateChange,
   onSwarmAlertsChange,
+  onDronePositionsChange,
 }) {
   const { t } = useTranslation()
   const [droneFleet, setDroneFleet] = useState(() => generateDroneFleet(droneCount))
@@ -208,6 +209,12 @@ function EnhancedDroneMap({
       }
     })
   }, [routes, progress, speed])
+
+  useEffect(() => {
+    if (onDronePositionsChange) {
+      onDronePositionsChange(dronePositions)
+    }
+  }, [dronePositions, onDronePositionsChange])
 
   const communicationLinks = useMemo(() => {
     const links = []
