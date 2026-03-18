@@ -137,7 +137,6 @@ const statusConfig = {
   Dispatched: { color: '#0ea5e9', bg: 'rgba(14,165,233,0.12)', label: 'activeOrders.statusDispatched' },
   'In Flight': { color: '#a855f7', bg: 'rgba(168,85,247,0.12)', label: 'activeOrders.statusInFlight' },
   Landing: { color: '#f97316', bg: 'rgba(249,115,22,0.12)', label: 'activeOrders.statusLanding' },
-  Arrived: { color: '#22c55e', bg: 'rgba(34,197,94,0.12)', label: 'activeOrders.statusArrived' },
 }
 
 function BatteryIcon({ level }) {
@@ -154,15 +153,13 @@ function ActiveOrdersPage() {
   const [cancelTarget, setCancelTarget] = useState(null)
   const [confirmOpen, setConfirmOpen] = useState(false)
 
-  // Simulate ETA countdown
+  // Simulate ETA countdown — remove order when ETA hits 0 (delivered)
   useEffect(() => {
     const timer = setInterval(() => {
       setOrders((prev) =>
-        prev.map((o) => ({
-          ...o,
-          eta: o.eta > 0 ? o.eta - 1 : 0,
-          status: o.eta === 1 ? 'Arrived' : o.status,
-        }))
+        prev
+          .map((o) => ({ ...o, eta: o.eta > 0 ? o.eta - 1 : 0 }))
+          .filter((o) => o.eta > 0)
       )
     }, 60000)
     return () => clearInterval(timer)
@@ -271,14 +268,12 @@ function ActiveOrdersPage() {
                           {t('activeOrders.eta')}
                         </Typography>
                         <Typography variant="caption" sx={{ fontWeight: 800, color: cfg.color }}>
-                          {order.eta === 0
-                            ? t('activeOrders.arrived')
-                            : `${order.eta} ${t('activeOrders.mins')}`}
+                          {`${order.eta} ${t('activeOrders.mins')}`}
                         </Typography>
                       </Stack>
                       <LinearProgress
                         variant="determinate"
-                        value={order.eta === 0 ? 100 : Math.max(5, 100 - order.eta * 4)}
+                        value={Math.max(5, 100 - order.eta * 4)}
                         sx={{
                           borderRadius: 4,
                           height: 6,
