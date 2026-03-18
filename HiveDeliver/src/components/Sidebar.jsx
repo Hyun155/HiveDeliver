@@ -42,7 +42,7 @@ function Sidebar({ onNavigate }) {
   const { logout, user } = useAuth()
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const brandLogo = '/hivedeliver-logo.svg'
+  const brandLogo = '/hivedeliver-logo.png'
 
   const handleLogout = () => {
     logout()
@@ -63,10 +63,7 @@ function Sidebar({ onNavigate }) {
           sx={{
             width: 42,
             height: 42,
-            borderRadius: 2,
             objectFit: 'cover',
-            boxShadow: '0 6px 20px rgba(15,118,110,0.35)',
-            border: '1px solid rgba(15,118,110,0.2)',
           }}
         />
         <Stack spacing={0}>
