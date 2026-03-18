@@ -19,7 +19,7 @@ function LandingPage() {
   const { t, i18n } = useTranslation()
   const { mode, toggleColorMode } = useColorMode()
   const isDarkMode = mode === 'dark'
-  const brandLogo = '/hivedeliver-logo.svg'
+  const brandLogo = '/hivedeliver-logo.png'
 
   // Language menu
   const [langAnchor, setLangAnchor] = useState(null)
@@ -117,8 +117,6 @@ function LandingPage() {
                 width: 40,
                 height: 40,
                 objectFit: 'cover',
-                borderRadius: '10px',
-                boxShadow: '0 10px 24px rgba(15, 118, 110, 0.24)',
               }}
             />
             <Typography variant="subtitle1" sx={{ fontWeight: 800 }}>
@@ -286,10 +284,8 @@ function LandingPage() {
           sx={{
             width: 104,
             height: 104,
-            borderRadius: '24px',
             objectFit: 'cover',
             mb: 3,
-            boxShadow: '0 20px 50px rgba(15, 118, 110, 0.25)',
           }}
         />
 
