@@ -583,7 +583,8 @@
     "cancelConfirmTitle": "Cancel this order?",
     "cancelConfirmMsg": "This will remove the order and recall the drone. This action cannot be undone.",
     "confirmCancel": "Yes, Cancel",
-    "keepOrder": "Keep Order"
+    "keepOrder": "Keep Order",
+    "cancel": "Cancel"
   },
   "parcelProof": {
     "title": "Parcel Proof",
@@ -603,6 +604,7 @@
     "timestamp": "Timestamp",
     "gps": "GPS",
     "note": "Note",
-    "close": "Close"
+    "close": "Close",
+    "all": "All"
   }
 }
