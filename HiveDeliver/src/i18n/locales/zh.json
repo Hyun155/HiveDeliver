@@ -25,7 +25,9 @@
     "security": "安全与区块链",
     "optimization": "蜂群优化",
     "interactive": "互动功能",
-    "logout": "登出"
+    "logout": "登出",
+    "activeOrders": "进行中订单",
+    "parcelProof": "送达凭证"
   },
   "pageTitles": {
     "home": "HiveDeliver 平台",
@@ -578,5 +580,44 @@
     "executed": "已执行",
     "failed": "失败",
     "conf": "置信度"
+  },
+  "activeOrders": {
+    "title": "进行中订单",
+    "subtitle": "监控您当前已发货和飞行中的配送",
+    "noOrders": "暂无进行中订单",
+    "noOrdersHint": "您的进行中配送将显示在此处",
+    "statusDispatched": "已发货",
+    "statusInFlight": "飞行中",
+    "statusLanding": "降落中",
+    "statusArrived": "已到达",
+    "eta": "预计到达",
+    "mins": "分钟",
+    "drone": "无人机",
+    "battery": "电量",
+    "cancelOrder": "取消订单",
+    "cancelConfirmTitle": "取消此订单？",
+    "cancelConfirmMsg": "这将删除订单并召回无人机。此操作无法撤销。",
+    "confirmCancel": "是，取消",
+    "keepOrder": "保留订单"
+  },
+  "parcelProof": {
+    "title": "送达凭证",
+    "subtitle": "查看配送照片、GPS记录并下载收据",
+    "tabAll": "全部",
+    "tabDelivered": "已送达",
+    "tabFailed": "失败",
+    "noProofs": "未找到配送记录",
+    "noProofsHint": "带有照片证明的已完成配送将显示在此处",
+    "delivered": "已送达",
+    "failed": "失败",
+    "downloadReceipt": "下载电子收据",
+    "viewProof": "查看凭证",
+    "recipient": "收件人",
+    "address": "地址",
+    "drone": "无人机",
+    "timestamp": "时间戳",
+    "gps": "GPS",
+    "note": "备注",
+    "close": "关闭"
   }
 }
