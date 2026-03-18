@@ -598,7 +598,8 @@
     "cancelConfirmTitle": "取消此订单？",
     "cancelConfirmMsg": "这将删除订单并召回无人机。此操作无法撤销。",
     "confirmCancel": "是，取消",
-    "keepOrder": "保留订单"
+    "keepOrder": "保留订单",
+    "cancel": "取消"
   },
   "parcelProof": {
     "title": "送达凭证",
@@ -618,6 +619,7 @@
     "timestamp": "时间戳",
     "gps": "GPS",
     "note": "备注",
-    "close": "关闭"
+    "close": "关闭",
+    "all": "全部"
   }
 }
