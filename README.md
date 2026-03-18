@@ -3,77 +3,115 @@
 HiveDeliver is a frontend simulation of an AI-powered swarm drone delivery platform for SME last-mile logistics.
 The app demonstrates decentralized swarm coordination, adaptive routing behavior, and real-time operational visibility using mock data.
 
+## Project Layout
+
+This repository uses a nested frontend folder:
+
+```text
+.
+|-- README.md
+`-- HiveDeliver/
+    |-- package.json
+    |-- src/
+    |   |-- components/
+    |   |-- contexts/
+    |   |-- data/
+    |   |-- hooks/
+    |   |-- i18n/
+    |   `-- pages/
+    `-- public/
+```
+
+Run all npm commands from the `HiveDeliver` folder.
+
 ## Highlights
-- Authenticated app shell with role-aware navigation and dynamic role badges (Manager / SME User)
-- Landing, auth, operations, and analytics pages
-- Full multi-language UI via react-i18next (`en`, `ms`, `ta`, `zh`) across all pages
-- Dark/light mode support
-- Rich Live Drone Map with simulation controls
-- AI-powered support chatbot for customer service
-- Interactive drone camera feed simulation with recording capability
+
+- Role-aware authenticated app shell with dynamic Manager and SME User badge behavior
+- Multi-language UI using react-i18next (`en`, `ms`, `ta`, `zh`)
+- Light and dark mode support
+- Rich live drone map simulation with weather-aware route behavior
+- AI chatbot support page for customer-service style Q and A
+- Canvas-based drone camera simulation with telemetry and recording states
+- Security and blockchain themed dashboard views
 
 ## Live Drone Map Features
-- Warehouse marker, destination markers, and active drone markers
-- Route simulation with no-fly zone detours
-- Weather indicators and weather-aware route styling
-- Drone-to-drone communication mesh (nearby link lines)
-- Animated communication signals to visualize network traffic
-- Swarm adaptive alerts panel (moved out of map canvas)
-- Right-rail compact legend and priority context cards
-- Swarm Coordination Status panel below the map
+
+- Warehouse, destination, and active drone markers
+- Route simulation with no-fly-zone detours
+- Weather indicators with route-style adaptation
+- Drone-to-drone communication mesh links
+- Animated swarm network traffic signals
+- Swarm adaptive alerts panel and compact legend cards
+- Coordination status panel below the map
 - Optional heatmap overlay from simulated coverage history
-- Unified map view across all user roles (SME and Manager see the same full map)
 
-## New Features & Enhancements
-- **Interactive Camera Feed**: Canvas-based live drone perspective with HUD, recording timer, play/pause controls, and real-time telemetry.
-- **Role-Based Delivery History**:
-  - SME Users (`/history`): View their own detailed delivery history with Delivered / Cancelled / Failed status badges.
-  - Managers (`/manager-history`): Global view of all deliveries with account type filtering and summary statistics.
-- **AI Chat Support (`/support`)**: Multi-lingual chatbot capable of answering queries about parcel tracking, pricing, drone availability, operating hours, order cancellation, and more.
-- **Complete Localization**: 100% translation coverage across Login, Register, Security, Swarm Optimization, Interactive Features, and Sidebar navigation in English, Malay, Chinese, and Tamil.
-- **Security & Blockchain**: Dashboard demonstrating secure transaction ledgers and immutable delivery proofs.
-- **Swarm Optimization**: Real-time visualization of battery-aware drone handoffs and multi-stop route efficiency.
-- **Role Badge in Header**: Top-right header dynamically shows "SME User" or "Manager" based on the logged-in account.
+## Role-Based Special Features
 
-## Main Pages
-- Public landing (`/`)
-- Login (`/login`) and sign-up (`/signup`, alias `/register`)
-- Home (`/home`)
-- Delivery Dashboard (`/dashboard`)
-- Live Drone Map (`/map`)
-- Create Delivery Order (`/order`)
-- Delivery History — SME view (`/history`)
-- Delivery History — Manager view (`/manager-history`)
-- Saved Addresses (`/addresses`)
-- Notifications (`/notifications`)
-- Swarm Intelligence (`/intelligence`)
-- Analytics (`/analytics`)
-- Fleet Management (`/fleet`)
-- Security & Blockchain (`/security`)
-- Swarm Optimization (`/optimization`)
-- Interactive Features (`/interactive`)
-- AI Chat Support (`/support`)
+### SME User Features
+
+- Delivery creation flow with route-aware order setup on /order.
+- Personal delivery history on /history with filters by parcel, status, and date.
+- Active order tracking on /active-orders with live ETA countdown, drone battery, distance, and cancel-when-dispatched flow.
+- Parcel proof center on /parcel-proof with Delivered and Failed evidence views, simulated drone photo captures, and downloadable receipt text files.
+- Saved address book on /addresses with add, edit, and delete management for repeat deliveries.
+- Notification center from header panel and /notifications page with unread counters, delivery lifecycle alerts, and mark-all-read support.
+- AI support chat on /support with quick actions and multilingual intent handling for tracking, pricing, cancellation, and operations questions.
+- Shared live map access on /map with swarm alerts, no-fly visibility, weather overlays, and simulation controls.
+
+### Manager Features
+
+- Platform-wide delivery history on /manager-history with account-type segmentation (SME versus manager), status/date filters, and performance summaries.
+- Swarm optimization console on /optimization with battery-aware handoff execution and multi-stop route optimization monitoring.
+- Interactive command center on /interactive with live drone camera feed cards, full-screen feed view, and command history.
+- Voice operations interface in the interactive module using Web Speech API command parsing for assign, handoff, map lookup, route optimization, battery checks, and return-to-base actions.
+- Manager analytics view on /analytics for KPI and trend visibility.
+- Security and blockchain dashboard on /security for immutable proof and trust-focused operations visualization.
+- Shared map command visibility on /map with real-time swarm health, communication links, and adaptive alert streams.
+- Role-aware shell controls with manager badge context and multilingual UI support.
+
+## Decentralized Swarm Intelligence Focus
+
+HiveDeliver centers on local, decentralized coordination rather than a single static route plan. Core simulation behavior includes:
+
+- Local peer-to-peer communication mesh: drones form dynamic links when within range using SWARM_COMMUNICATION_RANGE_METERS and live distance checks.
+- Local traffic awareness: high neighbor-density areas trigger adaptive traffic alerts and rerouting hints.
+- Weather-triggered decentralized adaptation: unsafe destination weather generates swarm adjustment alerts and nearby support-drone assistance suggestions.
+- Task redistribution signals: swarm state exposes when adaptive redistribution should activate based on active alerts.
+- No-fly-zone-safe corridor routing: route generation inserts detour waypoints around restricted circles before interpolation.
+- Priority-aware assignment: priority mode reorders destinations by criticality and rural urgency before route assignment.
+- Continuous autonomous telemetry loop: drone progress, ETA, links, and alert summaries are recalculated and emitted on timed intervals.
+- Operator-observable swarm state: communication status, collision-avoidance activity, optimization state, and redistribution readiness are surfaced in the Swarm Status panel.
+
+## Main Routes
+
+- Public: `/`
+- Auth: `/login`, `/signup`, `/register`
+- Protected: `/home`, `/dashboard`, `/map`, `/order`, `/active-orders`, `/parcel-proof`
+- Delivery history: `/history` (SME), `/manager-history` (Manager)
+- Operations: `/addresses`, `/notifications`, `/fleet`, `/analytics`, `/intelligence`
+- Advanced modules: `/security`, `/optimization`, `/interactive`, `/support`
+
+## Demo Accounts
+
+Use these built-in accounts for local testing:
+
+- Manager: `manager@hivedeliver.com` / `manager123`
+- SME User: `user@hivedeliver.com` / `user123`
+
+Credentials and session state are stored in browser localStorage keys:
+
+- `hiveDeliver_users`
+- `hiveDeliver_currentUser`
 
 ## Tech Stack
-- React + Vite
+
+- React 19 + Vite
 - Material UI
 - React Router
 - React Leaflet + Leaflet
 - Recharts
 - React Icons
-- Canvas API (for live camera feed simulation)
-
-## Folder Layout
-Frontend app root is nested:
-```text
-HiveDeliver/
-	src/
-		components/
-		contexts/
-		data/
-		hooks/
-		i18n/
-		pages/
+- i18next / react-i18next
 
 ## Getting Started
 
@@ -84,7 +122,7 @@ cd HiveDeliver
 npm install
 ```
 
-2. Start development server
+2. Start the development server
 
 ```bash
 npm run dev -- --host
@@ -96,7 +134,13 @@ npm run dev -- --host
 npm run build
 ```
 
-4. Lint
+4. Preview production build
+
+```bash
+npm run preview
+```
+
+5. Run linting
 
 ```bash
 npm run lint
@@ -104,6 +148,6 @@ npm run lint
 
 ## Notes
 
-- This is a frontend-only demo; all data is mocked.
-- Simulation behavior is timer-driven and deterministic enough for UI demos.
-- If the default port is occupied, Vite may move from `5173` to another port such as `5174`.
+- This is a frontend-only demo; all operational data is mocked.
+- The simulation is timer-driven and intended for UI and workflow demonstrations.
+- If port 5173 is busy, Vite automatically selects another available port.
